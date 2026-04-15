@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  app:
+    restart: unless-stopped
+    environment:
+      PHP_IDE_CONFIG: "serverName=stage"
+
+  nginx:
+    restart: unless-stopped
+    ports:
+      - "8081:80" # Port 8081 dipilih agar tidak bentrok dengan Port 80 Ubuntu
+
+  redis:
+    restart: unless-stopped
+    ports:
+      - "6381:6379"

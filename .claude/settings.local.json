@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan:*)",
+      "Bash(ls /home/deewahyu/WebDev/arsys/backend/bootstrap/cache/routes*)",
+      "Bash(grep -i \"abbrev\\\\|code\" /home/deewahyu/WebDev/arsys/backend/database/back/*program*)",
+      "Read(//home/deewahyu/WebDev/**)",
+      "Bash(make bash:*)",
+      "Bash(make psql:*)",
+      "Bash(docker-compose exec:*)",
+      "Bash(make artisan:*)",
+      "Bash(docker compose:*)",
+      "Bash(python3 -m json.tool)",
+      "Bash(grep -r \"wire:confirm\\\\|wireConfirm\" /home/deewahyu/WebDev/arsys/backend/public/build/assets/*.js)"
+    ]
+  }
+}

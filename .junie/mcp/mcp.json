@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/usr/local/Cellar/php@8.2/8.2.28_1/bin/php",
+            "args": [
+                "/Volumes/x280Data/WebDev/ST-App/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

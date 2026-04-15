@@ -1,0 +1,66 @@
+version: '3.7'
+
+services:
+  # PHP Application
+  app:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+      target: dev
+      args:
+        WWWUSER: ${WWWUSER:-1000}
+        WWWGROUP: ${WWWGROUP:-1000}
+    restart: always
+    container_name: ArSysMobile-app
+    working_dir: /var/www
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - redis
+      - mysql
+    networks:
+      - WebFPTE # MENYESUAIKAN NAMA NETWORK
+
+  nginx:
+    image: nginx:alpine
+    container_name: ArSysMobile-nginx
+    restart: always
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/var/www
+      - .docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - WebFPTE # MENYESUAIKAN NAMA NETWORK
+
+  mysql:
+    image: mysql:8.0
+    container_name: ArSysMobile-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Ddw8436
+      MYSQL_DATABASE: marsys
+      MYSQL_USER: ArSys
+      MYSQL_PASSWORD: Ddw8436
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./.docker/mysql/data:/var/lib/mysql
+    networks:
+      - WebFPTE
+
+  redis:
+    image: redis:alpine
+    container_name: ArSysMobile-redis
+    restart: always
+    networks:
+      - WebFPTE # MENYESUAIKAN NAMA NETWORK
+
+networks:
+  WebFPTE:
+    external: true # Memberitahu docker ini network yang sudah ada di luar file ini
+
